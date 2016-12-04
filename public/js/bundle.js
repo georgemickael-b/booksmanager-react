@@ -22083,7 +22083,7 @@
 	        null,
 	        _react2.default.createElement(
 	          _reactBootstrap.Navbar,
-	          { inverse: true, collapseOnSelect: true },
+	          { inverse: true, collapseOnSelect: true, className: 'navbar-fixed-top' },
 	          _react2.default.createElement(
 	            _reactBootstrap.Navbar.Header,
 	            null,
@@ -22103,7 +22103,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Grid,
-	          null,
+	          { style: { paddingTop: 65 } },
 	          _react2.default.createElement(
 	            _reactBootstrap.Row,
 	            null,

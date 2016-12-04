@@ -27,7 +27,7 @@ class App extends React.Component{
     var currMenuOption = this.state.currMenuOption
     return(
       <div>
-        <Navbar inverse collapseOnSelect>
+        <Navbar inverse collapseOnSelect className="navbar-fixed-top" >
           <Navbar.Header>
             <Navbar.Brand>
               <a href="#">Books Manager</a>
@@ -37,7 +37,7 @@ class App extends React.Component{
             currMenuOption={currMenuOption}
             onMenuOptionSelect={this.onMenuOptionSelect} />
        </Navbar>
-        <Grid>
+        <Grid style={{paddingTop:65}}>
           <Row>
             <Col xs={12} md={12}>
                 {currMenuOption==1 && <View />}
