@@ -24,6 +24,17 @@ getError = function(code){
   return {status:"error",msg:msg}
 }
 
+router.get('/count',function(req,res){
+  Book.count({}, function(err,count) {
+    if(err){
+      res.send(getError(err.code))
+    }
+    else{
+      res.send({status:"success",payload:count})
+    }
+  });
+})
+
 router.get('/', function(req, res) {
   console.log(req.query)
   var {i,n} = req.query
@@ -33,10 +44,10 @@ router.get('/', function(req, res) {
 
   Book.find({},{},options, function (err, docs) {
     if(err){
-      res.send(err)
+      res.send(getError(err.code))
     }
     else{
-      res.send(docs)
+      res.send({status:"success",payload:docs})
     }
   });
 });
@@ -52,26 +63,27 @@ router.post('/',function(req,res){
     })
     book.save(function(err){
       if(err)
-        res.send({data : getError(err.code)})
+        res.send(getError(err.code))
       else
-        res.send({data : {status:"success",msg:MSG_BOOK_ADDED} })
+        res.send({status:"success",msg:MSG_BOOK_ADDED})
     })
   }
   else{
-    res.send({data : {status:"invalid",msg:MSG_ERROR_INVALID_VALUES} })
+    res.send({status:"invalid",msg:MSG_ERROR_INVALID_VALUES})
   }
 })
 
 router.delete('/',function(req,res){
   var {ISBN} = req.body
+  console.log(req.body)
   if(!isValidValue(ISBN))
-    res.send({data : {status:"invalid",msg:MSG_ERROR_INVALID_VALUES} })
+    res.send({status:"invalid",msg:MSG_ERROR_INVALID_VALUES})
   else
     Book.findOneAndRemove({ISBN : ISBN },function(err){
       if(err)
-        res.send({data : getError(err.code)})
+        res.send(getError(err.code))
       else
-        res.send({data : {status:"success",msg:MSG_BOOK_DELETED} })
+        res.send({status:"success",msg:MSG_BOOK_DELETED})
     })
 })
 
@@ -84,17 +96,17 @@ router.put('/',function(req,res){ // For updating we will use _id as key coz ISB
     if(isValidValue(req.body[key]))
       update[key]=req.body[key]
     else{
-      res.send({data : {status:"invalid",msg:MSG_ERROR_INVALID_VALUES} })
+      res.send({status:"invalid",msg:MSG_ERROR_INVALID_VALUES})
       return
     }
   }
 
   Book.update({_id:_id},update,{},function(err){
     if(err)
-      res.send({data : getError(err.code)})
+      res.send(getError(err.code))
     else
-      res.send({data : {status:"success",msg:MSG_BOOK_UPDATED} })
+      res.send({status:"success",msg:MSG_BOOK_UPDATED})
   })
 })
 
-module.exports = router;
+module.exports = router

@@ -1,8 +1,22 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding:20px;
+  font-family: 'Roboto', sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.viewPanel .panel-body,.menuPanel .panel-body{
+  padding:0px;
+}
+
+h3{
+  font-size: 20px;
+}
+.header{
+  font-size: 25px;
+}
+body{
+  padding:0px;
 }
